@@ -23,28 +23,35 @@ namespace NextailKata.Tests
                 }
             };
 
-            Checkout = new Checkout(discounts);
-        }
-
-        [TestCase]
-        public void Checkout_OneOfEachProductTotal_SuccessPrice()
-        {
-            var items = new List<Item> {
-                new Item {
-                    Id = "VOUCHER",
+            var products = new List<Product>
+            {
+                new Product {
+                    Id = ProductType.VOUCHER,
                     Name = "Gift Card",
-                    Price = 5
+                    Price = 5M
                 },
-                new Item {
-                    Id = "TSHIRT",
+                new Product {
+                    Id = ProductType.TSHIRT,
                     Name = "Summer T-Shirt",
-                    Price = 20
+                    Price = 20M
                 },
-                new Item {
-                    Id = "PANTS",
+                new Product {
+                    Id = ProductType.PANTS,
                     Name = "Summer Pants",
                     Price = 7.5M
                 }
+            };
+
+            Checkout = new Checkout(discounts, products);
+        }
+
+        [TestCase]
+        public void CalculateTotal_OneOfEachProductTotal_SuccessPrice()
+        {
+            var items = new List<ProductType> {
+                ProductType.VOUCHER,
+                ProductType.TSHIRT,
+                ProductType.PANTS
             };
 
             foreach (var item in items)
@@ -56,5 +63,8 @@ namespace NextailKata.Tests
 
             Assert.AreEqual(32.50M, totalPrice); ;
         }
+
+        
+
     }
 }

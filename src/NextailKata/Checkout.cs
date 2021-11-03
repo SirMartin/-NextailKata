@@ -1,27 +1,31 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace NextailKata
 {
     public class Checkout : ICheckout
     {
-        public Checkout(List<Discount> discounts)
+        public Checkout(List<Discount> discounts, List<Product> products)
         {
             Discounts = discounts;
-            BoughtItems = new List<Item>();
+            Products = products;
+            BoughtItems = new List<ProductType>();
         }
 
         public List<Discount> Discounts { get; }
 
-        public List<Item> BoughtItems { get; }
+        public List<Product> Products { get; }
 
-        public void Scan(Item item)
+        public List<ProductType> BoughtItems { get; }
+
+        public void Scan(ProductType product)
         {
-            BoughtItems.Add(item);
+            BoughtItems.Add(product);
         }
 
         public decimal CalculateTotal()
         {
-            return BoughtItems.Sum(x => x.Price);
+            return BoughtItems.Sum(i => Products.Single(p => p.Id == i).Price);
         }
     }
 }

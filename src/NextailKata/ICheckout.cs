@@ -6,7 +6,9 @@ namespace NextailKata
     {
         List<Discount> Discounts { get; }
 
-        void Scan(Item item);
+        List<Product> Products { get; }
+
+        void Scan(ProductType product);
         decimal CalculateTotal();
     }
 }
