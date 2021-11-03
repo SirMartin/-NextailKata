@@ -46,7 +46,7 @@ namespace NextailKata.Tests
         }
 
         [TestCase]
-        public void CalculateTotal_OneOfEachProductTotal_SuccessPrice()
+        public void CalculateTotal_OneOfEachProduct_CorrectPrice()
         {
             var items = new List<ProductType> {
                 ProductType.VOUCHER,
@@ -61,11 +61,11 @@ namespace NextailKata.Tests
 
             var totalPrice = Checkout.CalculateTotal();
 
-            Assert.AreEqual(32.50M, totalPrice); ;
+            Assert.AreEqual(32.50M, totalPrice);
         }
 
         [TestCase]
-        public void CalculateTotal_SameItemMultiplyTimesTotal_SuccessPrice()
+        public void CalculateTotal_SameItemMultiplyTimes_CorrectPrice()
         {
             var items = new List<ProductType> {
                 ProductType.PANTS,
@@ -80,11 +80,11 @@ namespace NextailKata.Tests
 
             var totalPrice = Checkout.CalculateTotal();
 
-            Assert.AreEqual(22.5M, totalPrice); ;
+            Assert.AreEqual(22.5M, totalPrice);
         }
 
         [TestCase]
-        public void CalculateTotal_MultipleItemsMultiplyTimesTotal_SuccessPrice()
+        public void CalculateTotal_MultipleItemsMultiplyTimes_CorrectPrice()
         {
             var items = new List<ProductType> {
                 ProductType.TSHIRT,
@@ -101,7 +101,26 @@ namespace NextailKata.Tests
 
             var totalPrice = Checkout.CalculateTotal();
 
-            Assert.AreEqual(62.5M, totalPrice); ;
+            Assert.AreEqual(62.5M, totalPrice);
+        }
+
+        [TestCase]
+        public void CalculateTotal_VoucherDiscount_CorrectPrice()
+        {
+            var items = new List<ProductType> {
+                ProductType.VOUCHER,
+                ProductType.TSHIRT,
+                ProductType.VOUCHER
+            };
+
+            foreach (var item in items)
+            {
+                Checkout.Scan(item);
+            }
+
+            var totalPrice = Checkout.CalculateTotal();
+
+            Assert.AreEqual(25M, totalPrice);
         }
 
     }

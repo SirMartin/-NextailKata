@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NextailKata
@@ -25,7 +26,25 @@ namespace NextailKata
 
         public decimal CalculateTotal()
         {
-            return BoughtItems.Sum(i => Products.Single(p => p.Id == i).Price);
+            var totalPrice = BoughtItems.Sum(i => Products.Single(p => p.Id == i).Price);
+
+            totalPrice = ApplyDiscounts(totalPrice);
+
+            return totalPrice;
         }
+
+        private decimal ApplyDiscounts(decimal totalPrice)
+        {
+            // Check for the different discounts if can be applied.
+            var boughtVouchers = BoughtItems.Count(x => x == ProductType.VOUCHER);
+
+            if (boughtVouchers == 2)
+            {
+                totalPrice -= 5M;
+            }
+
+            return totalPrice;
+        }
+
     }
 }
