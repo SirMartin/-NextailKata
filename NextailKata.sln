@@ -9,11 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BAC2B7A7-8A0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B5980D6B-8C6F-4A6D-AC47-EA02CB5668AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextailKata.Tests", "tests\NextailKata.Tests\NextailKata.Tests.csproj", "{7E9FB12A-F1FD-489C-9C6D-4538BCF2DC23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NextailKata.Tests", "tests\NextailKata.Tests\NextailKata.Tests.csproj", "{7E9FB12A-F1FD-489C-9C6D-4538BCF2DC23}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{83B90EE5-0231-4470-BD85-76040D653C26}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		Backend Exercise.pdf = Backend Exercise.pdf
 		README.md = README.md
 	EndProjectSection
 EndProject
