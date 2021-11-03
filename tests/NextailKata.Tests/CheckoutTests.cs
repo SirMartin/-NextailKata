@@ -8,7 +8,7 @@ namespace NextailKata.Tests
     {
         public Checkout Checkout { get; set; }
 
-        [OneTimeSetUp]
+        [SetUp]
         public void Setup()
         {
             var discounts = new List<Discount>
@@ -64,7 +64,45 @@ namespace NextailKata.Tests
             Assert.AreEqual(32.50M, totalPrice); ;
         }
 
-        
+        [TestCase]
+        public void CalculateTotal_SameItemMultiplyTimesTotal_SuccessPrice()
+        {
+            var items = new List<ProductType> {
+                ProductType.PANTS,
+                ProductType.PANTS,
+                ProductType.PANTS
+            };
+
+            foreach (var item in items)
+            {
+                Checkout.Scan(item);
+            }
+
+            var totalPrice = Checkout.CalculateTotal();
+
+            Assert.AreEqual(22.5M, totalPrice); ;
+        }
+
+        [TestCase]
+        public void CalculateTotal_MultipleItemsMultiplyTimesTotal_SuccessPrice()
+        {
+            var items = new List<ProductType> {
+                ProductType.TSHIRT,
+                ProductType.TSHIRT,
+                ProductType.PANTS,
+                ProductType.PANTS,
+                ProductType.PANTS
+            };
+
+            foreach (var item in items)
+            {
+                Checkout.Scan(item);
+            }
+
+            var totalPrice = Checkout.CalculateTotal();
+
+            Assert.AreEqual(62.5M, totalPrice); ;
+        }
 
     }
 }
