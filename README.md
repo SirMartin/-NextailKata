@@ -2,7 +2,7 @@
 
 #### INSTRUCTIONS
 
-The instructions of the kata are in the ***Backend Exercise.pdf*** file.
+The instructions of the kata are [here](https://github.com/SirMartin/NextailKata/blob/master/Backend%20Exercise.pdf) in the ***Backend Exercise.pdf*** file.
 
 #### COMMENTS
 
