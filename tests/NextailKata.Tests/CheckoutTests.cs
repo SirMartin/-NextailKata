@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using NextailKata.Basket;
+using NextailKata.Discounts;
+using NextailKata.Products;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace NextailKata.Tests
@@ -11,16 +14,14 @@ namespace NextailKata.Tests
         [SetUp]
         public void Setup()
         {
-            var discounts = new List<Discount>
+            var discounts = new List<IDiscount>
             {
-                new Discount {
-                    Id = "2x1_Vouchers",
-                    Description = "A 2-for-1 special on VOUCHER items."
-                },
-                new Discount {
-                    Id = "TShirtsBulk",
-                    Description = "If you buy 3 or more TSHIRT items, the price per unit should be 19.00€."
-                }
+                new TwoForOneDiscount("2x1_Vouchers", "A 2-for-1 special on VOUCHER items.", ProductType.VOUCHER)
+                //},
+                //new Discount {
+                //    Id = "TShirtsBulk",
+                //    Description = "If you buy 3 or more TSHIRT items, the price per unit should be 19.00€."
+                //}
             };
 
             var products = new List<Product>
@@ -121,6 +122,51 @@ namespace NextailKata.Tests
             var totalPrice = Checkout.CalculateTotal();
 
             Assert.AreEqual(25M, totalPrice);
+        }
+
+        [TestCase]
+        public void CalculateTotal_MultipleVoucherDiscount_CorrectPrice()
+        {
+            var items = new List<ProductType> {
+                ProductType.VOUCHER,
+                ProductType.VOUCHER,
+                ProductType.VOUCHER,
+                ProductType.VOUCHER,
+                ProductType.VOUCHER,
+                ProductType.VOUCHER
+            };
+
+            foreach (var item in items)
+            {
+                Checkout.Scan(item);
+            }
+
+            var totalPrice = Checkout.CalculateTotal();
+
+            Assert.AreEqual(15M, totalPrice);
+        }
+
+        [TestCase]
+        public void CalculateTotal_MultipleVoucherDiscountWithExtraVouchers_CorrectPrice()
+        {
+            var items = new List<ProductType> {
+                ProductType.VOUCHER,
+                ProductType.VOUCHER,
+                ProductType.VOUCHER,
+                ProductType.VOUCHER,
+                ProductType.VOUCHER,
+                ProductType.VOUCHER,
+                ProductType.VOUCHER
+            };
+
+            foreach (var item in items)
+            {
+                Checkout.Scan(item);
+            }
+
+            var totalPrice = Checkout.CalculateTotal();
+
+            Assert.AreEqual(20M, totalPrice);
         }
 
         [TestCase]

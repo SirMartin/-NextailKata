@@ -1,4 +1,4 @@
-﻿namespace NextailKata
+﻿namespace NextailKata.Products
 {
     public enum ProductType
     {
