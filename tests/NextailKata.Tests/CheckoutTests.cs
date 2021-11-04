@@ -16,12 +16,8 @@ namespace NextailKata.Tests
         {
             var discounts = new List<IDiscount>
             {
-                new TwoForOneDiscount("2x1_Vouchers", "A 2-for-1 special on VOUCHER items.", ProductType.VOUCHER)
-                //},
-                //new Discount {
-                //    Id = "TShirtsBulk",
-                //    Description = "If you buy 3 or more TSHIRT items, the price per unit should be 19.00€."
-                //}
+                new TwoForOneDiscount("2x1_Vouchers", "A 2-for-1 special on VOUCHER items.", ProductType.VOUCHER),
+                new BulkDiscount ("TShirtsBulk", "If you buy 3 or more TSHIRT items, the price per unit should be 19.00€.", ProductType.TSHIRT, 3, 1)
             };
 
             var products = new List<Product>
