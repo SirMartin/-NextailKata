@@ -19,14 +19,14 @@ namespace NextailKata.Discounts
             ProductType = productType;
         }
 
-        public bool IsDiscountApplyable(List<ProductType> boughtItems)
+        public bool IsDiscountApplyable(List<ProductType> basket)
         {
-            return boughtItems.Count(x => x == ProductType) >= 2;
+            return basket.Count(x => x == ProductType) >= 2;
         }
 
-        public decimal ApplyDiscount(List<ProductType> boughtItems)
+        public decimal ApplyDiscount(List<ProductType> basket)
         {
-            var numberOfDiscounts = boughtItems.Count(x => x == ProductType) / 2;
+            var numberOfDiscounts = basket.Count(x => x == ProductType) / 2;
 
             return numberOfDiscounts * 5;
         }

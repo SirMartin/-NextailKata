@@ -3,7 +3,7 @@ using NextailKata.Products;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NextailKata.Basket
+namespace NextailKata.Checkout
 {
     public class Checkout : ICheckout
     {
@@ -11,23 +11,23 @@ namespace NextailKata.Basket
         {
             Discounts = discounts;
             Products = products;
-            BoughtItems = new List<ProductType>();
+            Basket = new List<ProductType>();
         }
 
         public List<IDiscount> Discounts { get; }
 
         public List<Product> Products { get; }
 
-        public List<ProductType> BoughtItems { get; }
+        public List<ProductType> Basket { get; }
 
         public void Scan(ProductType product)
         {
-            BoughtItems.Add(product);
+            Basket.Add(product);
         }
 
         public decimal CalculateTotal()
         {
-            var totalPrice = BoughtItems.Sum(i => Products.Single(p => p.Id == i).Price);
+            var totalPrice = Basket.Sum(i => Products.Single(p => p.Id == i).Price);
 
             totalPrice = ApplyDiscounts(totalPrice);
 
@@ -39,9 +39,9 @@ namespace NextailKata.Basket
             // Check for the different discounts if can be applied.
             foreach(var discount in Discounts)
             {
-                if (discount.IsDiscountApplyable(BoughtItems))
+                if (discount.IsDiscountApplyable(Basket))
                 {
-                    totalPrice -= discount.ApplyDiscount(BoughtItems);
+                    totalPrice -= discount.ApplyDiscount(Basket);
                 }
             }
 

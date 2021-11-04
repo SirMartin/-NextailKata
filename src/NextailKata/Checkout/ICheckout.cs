@@ -2,7 +2,7 @@
 using NextailKata.Products;
 using System.Collections.Generic;
 
-namespace NextailKata.Basket
+namespace NextailKata.Checkout
 {
     public interface ICheckout
     {
@@ -11,6 +11,7 @@ namespace NextailKata.Basket
         List<Product> Products { get; }
 
         void Scan(ProductType product);
+
         decimal CalculateTotal();
     }
 }

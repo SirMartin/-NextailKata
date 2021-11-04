@@ -11,6 +11,6 @@ namespace NextailKata.Discounts
 
         bool IsDiscountApplyable(List<ProductType> basket);
 
-        decimal ApplyDiscount(List<ProductType> boughtItems);
+        decimal ApplyDiscount(List<ProductType> basket);
     }
 }

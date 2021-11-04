@@ -1,5 +1,4 @@
-﻿using NextailKata.Basket;
-using NextailKata.Discounts;
+﻿using NextailKata.Discounts;
 using NextailKata.Products;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ namespace NextailKata.Tests
     [TestFixture]
     public class CheckoutTests
     {
-        public Checkout Checkout { get; set; }
+        public Checkout.Checkout Checkout { get; set; }
 
         [SetUp]
         public void Setup()
@@ -39,7 +38,58 @@ namespace NextailKata.Tests
                 }
             };
 
-            Checkout = new Checkout(discounts, products);
+            Checkout = new Checkout.Checkout(discounts, products);
+        }
+
+        [TestCase]
+        public void CalculateTotal_OnlyVoucher_CorrectPrice()
+        {
+            var items = new List<ProductType> {
+                ProductType.VOUCHER
+            };
+
+            foreach (var item in items)
+            {
+                Checkout.Scan(item);
+            }
+
+            var totalPrice = Checkout.CalculateTotal();
+
+            Assert.AreEqual(5M, totalPrice);
+        }
+
+        [TestCase]
+        public void CalculateTotal_OnlyTShirt_CorrectPrice()
+        {
+            var items = new List<ProductType> {
+                ProductType.TSHIRT
+            };
+
+            foreach (var item in items)
+            {
+                Checkout.Scan(item);
+            }
+
+            var totalPrice = Checkout.CalculateTotal();
+
+            Assert.AreEqual(20M, totalPrice);
+        }
+
+        [TestCase]
+        public void CalculateTotal_OnlyPants_CorrectPrice()
+        {
+            var items = new List<ProductType> {
+                ProductType.PANTS
+            };
+
+            foreach (var item in items)
+            {
+                Checkout.Scan(item);
+            }
+
+            var totalPrice = Checkout.CalculateTotal();
+
+            Assert.AreEqual(7.50M, totalPrice);
         }
 
         [TestCase]
