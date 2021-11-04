@@ -186,5 +186,28 @@ namespace NextailKata.Tests
             Assert.AreEqual(81M, totalPrice);
         }
 
+        [TestCase]
+        public void CalculateTotal_MultipleDiscounts_CorrectPrice()
+        {
+            var items = new List<ProductType> {
+                ProductType.VOUCHER,
+                ProductType.TSHIRT,
+                ProductType.VOUCHER,
+                ProductType.VOUCHER,
+                ProductType.PANTS,
+                ProductType.TSHIRT,
+                ProductType.TSHIRT
+            };
+
+            foreach (var item in items)
+            {
+                Checkout.Scan(item);
+            }
+
+            var totalPrice = Checkout.CalculateTotal();
+
+            Assert.AreEqual(74.5M, totalPrice);
+        }
+
     }
 }
