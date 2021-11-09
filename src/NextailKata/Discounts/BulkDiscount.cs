@@ -25,7 +25,7 @@ namespace NextailKata.Discounts
             PriceDifference = priceDifference;
         }
 
-        public bool IsDiscountApplyable(List<ProductType> basket)
+        public bool IsDiscountApplicable(List<ProductType> basket)
         {
             return basket.Count(x => x == ProductType) >= MinQuantity;
         }

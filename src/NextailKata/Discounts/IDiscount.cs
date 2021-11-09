@@ -9,7 +9,7 @@ namespace NextailKata.Discounts
 
         string Description { get; }
 
-        bool IsDiscountApplyable(List<ProductType> basket);
+        bool IsDiscountApplicable(List<ProductType> basket);
 
         decimal ApplyDiscount(List<ProductType> basket);
     }

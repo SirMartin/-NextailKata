@@ -39,7 +39,7 @@ namespace NextailKata.Checkout
             // Check for the different discounts if can be applied.
             foreach(var discount in Discounts)
             {
-                if (discount.IsDiscountApplyable(Basket))
+                if (discount.IsDiscountApplicable(Basket))
                 {
                     totalPrice -= discount.ApplyDiscount(Basket);
                 }
